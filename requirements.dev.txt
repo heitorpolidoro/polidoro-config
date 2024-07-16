@@ -1,0 +1,4 @@
+-r requirements.txt
+-r requirements.test.txt
+pytest-xdist<=4.0
+black<=24.0
