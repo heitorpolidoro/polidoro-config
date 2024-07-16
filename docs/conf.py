@@ -25,9 +25,7 @@ myst_enable_extensions = ["colon_fence", "fieldlist"]
 
 # Autodoc2 Configuration
 autodoc2_render_plugin = "myst"
-autodoc2_packages = [
-    "../PACKAGE"
-]
+autodoc2_packages = ["../PACKAGE"]
 
 autodoc2_hidden_objects = ["inherited", "dunder", "private"]
 autodoc2_sort_names = True
