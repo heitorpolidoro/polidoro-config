@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.9", "3.10", "3.11"]
+        python_version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
       - name: Checkout
@@ -38,6 +38,13 @@ jobs:
       - name: Run tests
         run: |
           pytest --cov --cov-branch --cov-report=xml
+
+      - name: Upload artifact
+        if: ${{ matrix.python_version == '3.12' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage.xml
+          path: coverage.xml
 
   code_quality:
     name: Code Quality
