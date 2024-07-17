@@ -12,7 +12,7 @@ on:
 jobs:
   code_quality:
     name: Code Quality
-    uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@master
+    uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@python_matrix
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
