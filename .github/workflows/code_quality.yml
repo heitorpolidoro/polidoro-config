@@ -1,16 +1,15 @@
 name: Code Quality
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches:
-      - master
+  workflow_run:
+    workflows:
+      - Later Python Versions
+    types:
+      - completed
 
 jobs:
   code_quality:
+    if: ${{ github.event.workflow_run.conclusion == 'success'}}
     name: Code Quality
     uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@master
     secrets:
