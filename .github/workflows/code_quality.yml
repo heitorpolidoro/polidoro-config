@@ -18,7 +18,11 @@ jobs:
       - name: Set Python version
         id: set
         run: |
-          echo "PYTHON_VER=['3.9', '3.10', '3.11']" >> $GITHUB_OUTPUT
+          #!/bin/bash
+  
+          s="3.9, 3.10"
+          IFS=', ' read -ra list_version <<< "$s"
+          echo "PYTHON_VER=list_version" >> $GITHUB_OUTPUT
   tests:
     name: Tests
     needs: set_matrix
