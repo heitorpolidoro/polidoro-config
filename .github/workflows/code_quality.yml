@@ -20,4 +20,4 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10"]
     with:
-      python_version:  ${{ inputs.python_versions }}
+      python_version:  ${{ matrix.python-version }}
