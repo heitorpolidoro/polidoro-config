@@ -1,7 +1,5 @@
 name: Code Quality
 
-name: Later Python Versions
-
 on:
   push:
     branches:
