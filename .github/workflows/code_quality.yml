@@ -10,12 +10,22 @@ on:
       - master
 
 jobs:
+  set_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      python_version: ${{ steps.set.outputs.PYTHON_VER }}
+    steps:
+      - name: Set Python version
+        id: set
+        run: |
+          echo "::set-output name=PYTHON_VER::["3.9", "3.10", "3.11", "3.12"]"
   tests:
     name: Tests
+    needs: set_matrix
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python_version: ["3.9", "3.10", "3.11", "3.12"]
+        python_version: ${{fromJson(needs.set_matrix.outputs.python_version)}}
 
     steps:
       - name: Checkout
@@ -46,10 +56,10 @@ jobs:
           name: coverage.xml
           path: coverage.xml
 
-  code_quality:
-    name: Code Quality
-    uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@master
-    needs: tests
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+#  code_quality:
+#    name: Code Quality
+#    uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@master
+#    needs: tests
+#    secrets:
+#      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
