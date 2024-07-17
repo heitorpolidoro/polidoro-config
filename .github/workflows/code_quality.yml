@@ -21,8 +21,8 @@ jobs:
           #!/bin/bash
   
           s="3.9, 3.10"
-          IFS=', ' read -ra list_version <<< "$s"
-          echo "PYTHON_VER=list_version" >> $GITHUB_OUTPUT
+          python -c "print('PYTHON_VER='+str('$s'.split(',')))"
+          python -c "print('PYTHON_VER='+str('$s'.split(',')))" >> $GITHUB_OUTPUT
   tests:
     name: Tests
     needs: set_matrix
