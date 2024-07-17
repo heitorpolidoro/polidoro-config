@@ -17,8 +17,6 @@ def clean_env():
     os.environ.update(original_environ)
 
 
-
-
 def test_get_from_environ(monkeypatch):
     monkeypatch.setenv("MY_ENV", "my_value")
     assert Config.MY_ENV == "my_value"
