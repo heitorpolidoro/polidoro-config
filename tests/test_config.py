@@ -17,8 +17,6 @@ def clean_env():
     os.environ.update(original_environ)
 
 
-# def teardown_function():
-#     Config.clear()
 
 
 def test_get_from_environ(monkeypatch):

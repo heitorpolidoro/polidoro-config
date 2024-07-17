@@ -39,7 +39,7 @@ class ConfigError(AttributeError):
     """Exception raised for errors in the configuration."""
 
 
-class _Config(object):
+class _Config:
     """
     Documentation for class _Config:
 
