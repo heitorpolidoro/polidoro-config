@@ -17,6 +17,4 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
     with:
-      python_versions: |-
-        "3.9"
-        "3.8"
+      python_versions: ["3.9", "3.8"]
