@@ -18,7 +18,7 @@ jobs:
       - name: Set Python version
         id: set
         run: |
-          echo "::set-output name=PYTHON_VER::["3.9", "3.10", "3.11", "3.12"]"
+          echo "PYTHON_VER=['3.9', '3.10', '3.11']" >> $GITHUB_OUTPUT
   tests:
     name: Tests
     needs: set_matrix
