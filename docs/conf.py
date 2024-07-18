@@ -8,7 +8,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 """
 
-project = "Project"
+project = "Polidoro Config"
 copyright = "2024, Heitor Polidoro"
 author = "Heitor Polidoro"
 
@@ -25,7 +25,7 @@ myst_enable_extensions = ["colon_fence", "fieldlist"]
 
 # Autodoc2 Configuration
 autodoc2_render_plugin = "myst"
-autodoc2_packages = ["../PACKAGE"]
+autodoc2_packages = ["../pconfig"]
 
 autodoc2_hidden_objects = ["inherited", "dunder", "private"]
 autodoc2_sort_names = True
