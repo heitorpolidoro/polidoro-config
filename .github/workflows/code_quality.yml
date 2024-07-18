@@ -10,56 +10,6 @@ on:
       - master
 
 jobs:
-#  set_matrix:
-#    runs-on: ubuntu-latest
-#    outputs:
-#      python_version: ${{ steps.set.outputs.PYTHON_VER }}
-#    steps:
-#      - name: Set Python version
-#        id: set
-#        run: |
-#          #!/bin/bash
-#
-#          s="3.9, 3.10"
-#          python -c "print('PYTHON_VER='+str('$s'.split(',')))"
-#          python -c "print('PYTHON_VER='+str('$s'.split(',')))" >> $GITHUB_OUTPUT
-#  tests:
-#    name: Tests
-#    needs: set_matrix
-#    runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        python_version: ${{fromJson(needs.set_matrix.outputs.python_version)}}
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v4
-#        with:
-#          fetch-depth: 0
-#
-#      - name: Set up Python ${{ matrix.python_version }}
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: ${{ matrix.python_version }}
-#          cache: 'pip'
-#
-#      - name: Install dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          if [ -f requirements.test.txt ]; then pip install -r requirements.test.txt;
-#          elif [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-#
-#      - name: Run tests
-#        run: |
-#          pytest --cov --cov-branch --cov-report=xml
-#
-#      - name: Upload artifact
-#        if: ${{ matrix.python_version == '3.12' }}
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: coverage.xml
-#          path: coverage.xml
-
   code_quality:
     name: Code Quality
     uses: heitorpolidoro/.github/.github/workflows/code_quality_analyzers.yml@master

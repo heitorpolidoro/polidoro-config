@@ -39,11 +39,10 @@ class ConfigError(AttributeError):
     """Exception raised for errors in the configuration."""
 
 
-class _Config:
-    """
-    Documentation for class _Config:
+class ConfigBase:
+    """ConfigBase Class
 
-    The _Config class provides methods for loading a .env file and retrieving environment variables.
+    This class provides methods for loading .env files and retrieving environment variables.
 
     """
 
@@ -74,4 +73,4 @@ class _Config:
         raise ConfigError(f"No such environment variable with the name '{item}'.")
 
 
-Config = _Config()
+Config = ConfigBase()
