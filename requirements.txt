@@ -1,4 +1,0 @@
-github-app-handler<=1.0
-sentry-sdk<=2.0
-flask<=4.0.0
-Polidoro-PyGithub<=3.0
