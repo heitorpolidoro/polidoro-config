@@ -3,24 +3,24 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "PROJECT_NAME"
+name = "polidoro-config"
 authors = [
     { name="Heitor Luis Polidoro" },
 ]
-description = "Package to help creates Github Apps."
+description = "Package to manage configuration for you project."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = []
 license = { text = "MIT" }
 classifiers = [
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10+",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 dynamic = ["version", "dependencies"]
 
 [project.urls]
-"Homepage" = "https://github.com/heitorpolidoro/PROJECT_NAME"
+"Homepage" = "https://github.com/heitorpolidoro/polidoro-config"
 
 [tool.setuptools.dynamic]
 version = {attr = ".__version__"}

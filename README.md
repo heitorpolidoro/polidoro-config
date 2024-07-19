@@ -20,6 +20,10 @@ Polidoro Config it is a configuration manager for you project
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=heitorpolidoro_polidoro-config&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=heitorpolidoro_polidoro-config)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=heitorpolidoro_polidoro-config&metric=bugs)](https://sonarcloud.io/summary/new_code?id=heitorpolidoro_polidoro-config)
 
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.10)&logo=python&label=3.10)<br>
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.11)&logo=python&label=3.11)<br>
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.12)&logo=python&label=3.12)<br>
+
 ## Usage
 Create a class inheriting from ConfigBase
 ```python
