@@ -18,7 +18,8 @@ import os
 
 
 class ConfigLoader:
-    """ Responsible for loading configuration data from different sources. """
+    """Responsible for loading configuration data from different sources."""
+
     @staticmethod
     def load_dotenv(dotenv_path: str | None = None) -> bool:
         """
