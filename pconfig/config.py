@@ -5,8 +5,8 @@ It allows you to load configuration settings from various sources such as
 environment variables, configuration files (e.g., YAML).
 """
 
-import os
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -42,10 +42,10 @@ class _ConfigMeta(type):
     """Metaclass that loads environment variables into class attributes."""
 
     def __init__(
-            cls: type["ConfigBase"],
-            name: str,
-            bases: tuple[type] | None = None,
-            attributes: dict[str, object] | None = None,
+        cls: type["ConfigBase"],
+        name: str,
+        bases: tuple[type] | None = None,
+        attributes: dict[str, object] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
         ConfigLoader.load_dotenv()
