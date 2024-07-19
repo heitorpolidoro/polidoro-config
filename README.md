@@ -3,6 +3,7 @@ Polidoro Config it is a configuration manager for you project
 
 [![Code Quality](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/code_quality.yml/badge.svg)](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/code_quality.yml)
 [![Upload Python Package](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/pypi-publish.yml)
+[![Documentation Status](https://readthedocs.org/projects/polidoro-config/badge/?version=latest)](https://polidoro-config.readthedocs.io/en/latest/?badge=latest)
 <br>
 [![Latest Version](https://img.shields.io/github/v/release/heitorpolidoro/polidoro-config?label=Latest%20Version)](https://github.com/heitorpolidoro/polidoro-config/releases/latest)
 ![GitHub Release Date](https://img.shields.io/github/release-date/heitorpolidoro/polidoro-config)
