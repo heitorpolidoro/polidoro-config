@@ -10,44 +10,18 @@ The main components of this module are:
 
 - ConfigLoader: Responsible for loading configuration data from different sources.
 - ConfigError: Raised when the config is not found.
-- ConfigManager: Manages the loaded configuration data and provides an interface
-   for accessing and modifying the configuration settings.
+- ConfigBase: The base class to be inherited for manage the project configuration.
 
-Example usage:
-
-    # Default usage
-    Config.DB_HOST
-
-    # Load configuration from a YAML file
-    Config.load_from_file('config.yaml')
-
-    # Create a ConfigManager instance
-    config_manager = ConfigManager()
-    config_manager.set('app.debug', True)
-    print(Config.app.debug)
-    >> True
-
-    # When the config is not found
-    Config.NOT_FOUND
-    >> ConfigError: No such environment variable with the name 'NOT_FOUND'
 """
 
 import os
 
 
-class ConfigError(AttributeError):
-    """Exception raised for errors in the configuration."""
-
-
-class ConfigBase:
-    """ConfigBase Class
-
-    This class provides methods for loading .env files and retrieving environment variables.
-
-    """
+class ConfigLoader:
+    """Responsible for loading configuration data from different sources."""
 
     @staticmethod
-    def load_dotenv() -> bool:
+    def load_dotenv(dotenv_path: str | None = None) -> bool:
         """
         Load the .env file if it is present.
 
@@ -56,9 +30,10 @@ class ConfigBase:
         is_env_file_present = os.path.isfile(".env")
         if is_env_file_present:
             try:
+                # noinspection PyPackageRequirements,PyUnresolvedReferences
                 import dotenv
 
-                dotenv.load_dotenv()
+                dotenv.load_dotenv(dotenv_path)
                 return True
             except ImportError:
                 print(
@@ -67,10 +42,40 @@ class ConfigBase:
                 )
         return False
 
-    def __getattr__(self, item: str) -> object:
-        if item in os.environ:
-            return os.environ[item]
-        raise ConfigError(f"No such environment variable with the name '{item}'.")
+
+class ConfigError(AttributeError):
+    """Exception raised for errors in the configuration."""
 
 
-Config = ConfigBase()
+class _ConfigMeta(type):
+    """Metaclass that loads environment variables into class attributes.
+
+    This metaclass is responsible for automatically loading environment variables and setting them as class attributes.
+    It is designed to be used as the metaclass for the `ConfigBase` class.
+
+    """
+
+    def __init__(
+        cls: type["ConfigBase"],
+        what: str,
+        bases: tuple[type] | None = None,
+        dict_values: dict[str, object] | None = None,
+    ) -> None:
+        super().__init__(what, bases, dict_values)
+        if what != "ConfigBase":
+            ConfigLoader.load_dotenv()
+            for env, value in dict_values.items():
+                if not env.startswith("__"):
+                    setattr(cls, env, os.getenv(env, value))
+
+
+class ConfigBase(metaclass=_ConfigMeta):
+    """
+    This class is the base class for configuration classes.
+
+    Create you config class inheriting from ConfigBase
+    Ex:
+    class Config(ConfigBase):
+        NAME1 = VALUE1
+        NAME2 = VALUE2
+    """
