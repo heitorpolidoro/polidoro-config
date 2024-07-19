@@ -59,7 +59,7 @@ class _ConfigMeta(type):
         cls: type["ConfigBase"],
         what: str,
         bases: tuple[type] | None = None,
-        dict_values: dict[str,object] | None = None,
+        dict_values: dict[str, object] | None = None,
     ) -> None:
         super().__init__(what, bases, dict_values)
         if what != "ConfigBase":
