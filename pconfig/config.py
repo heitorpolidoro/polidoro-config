@@ -67,7 +67,6 @@ class _ConfigMeta(type):
             for env, value in dict_values.items():
                 if not env.startswith("__"):
                     setattr(cls, env, os.getenv(env, value))
-        # cls.__dict__.update(os.environ)
 
 
 class ConfigBase(metaclass=_ConfigMeta):
