@@ -1,5 +1,4 @@
 import os
-import sys
 from copy import deepcopy
 from unittest.mock import patch
 

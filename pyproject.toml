@@ -1,13 +1,16 @@
 [build-system]
-requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=61",
+    "setuptools-scm[toml]>=6.2.3",
+]
 
 [project]
 name = "polidoro-config"
+description = "Package to manage configuration for you project."
 authors = [
     { name="Heitor Luis Polidoro" },
 ]
-description = "Package to manage configuration for you project."
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = []
@@ -21,6 +24,7 @@ dynamic = ["version", "dependencies"]
 
 [project.urls]
 "Homepage" = "https://github.com/heitorpolidoro/polidoro-config"
+"Source" = "https://polidoro-config.readthedocs.io/"
 
 [tool.setuptools.dynamic]
 version = {attr = ".__version__"}
