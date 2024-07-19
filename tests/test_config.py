@@ -55,7 +55,7 @@ def test_load_dotenv_when_dotenv_is_not_installed(tmp_path):
     with (
         change_dir(tmp_path),
         patch("dotenv.main.find_dotenv", return_value=dotenv_file),
-        patch.dict(sys.modules, {"dotenv": None}),
+        patch("pconfig.config.dotenv", None),
     ):
 
         class ConfigTest(ConfigBase):
