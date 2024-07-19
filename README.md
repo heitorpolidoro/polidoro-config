@@ -4,6 +4,11 @@ Polidoro Config it is a configuration manager for you project
 [![Code Quality](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/code_quality.yml/badge.svg)](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/code_quality.yml)
 [![Upload Python Package](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/pypi-publish.yml/badge.svg)](https://github.com/heitorpolidoro/polidoro-config/actions/workflows/pypi-publish.yml)
 <br>
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.9)&logo=python&label=3.9)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.10)&logo=python&label=3.10)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.11)&logo=python&label=3.11)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.12)&logo=python&label=3.12)
+<br>
 [![Latest Version](https://img.shields.io/github/v/release/heitorpolidoro/polidoro-config?label=Latest%20Version)](https://github.com/heitorpolidoro/polidoro-config/releases/latest)
 ![GitHub Release Date](https://img.shields.io/github/release-date/heitorpolidoro/polidoro-config)
 ![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/heitorpolidoro/polidoro-config/latest)
