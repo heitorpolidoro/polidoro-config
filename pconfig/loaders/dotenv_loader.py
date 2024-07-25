@@ -28,7 +28,7 @@ class ConfigDotEnvLoader(ConfigLoader):
     order = 1
 
     @classmethod
-    def load_config(cls, config_class: "ConfigBase") -> dict[str,object]:
+    def load_config(cls, config_class: "ConfigBase") -> dict[str, object]:
         """
         Load a .env file into environment variables.
         :return: A boolean indicating whether the .env file is successfully loaded.

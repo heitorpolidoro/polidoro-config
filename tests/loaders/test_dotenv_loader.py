@@ -1,5 +1,5 @@
 import importlib
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
 
 from pconfig.config import ConfigBase
 from pconfig.loaders import dotenv_loader

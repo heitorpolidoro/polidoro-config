@@ -6,6 +6,3 @@ import pytest
 
 from pconfig.config import ConfigBase
 from tests.conftest import change_dir
-
-
-
