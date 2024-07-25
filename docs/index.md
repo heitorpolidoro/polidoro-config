@@ -32,9 +32,10 @@ new_value
 ```
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 0
+:hidden:
 
-apidocs/index
+classes/index
 ```
 
 

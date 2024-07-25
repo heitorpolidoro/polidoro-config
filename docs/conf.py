@@ -18,6 +18,7 @@ author = "Heitor Polidoro"
 extensions = [
     "myst_parser",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "autodoc2",
     "sphinx_copybutton",
 ]
@@ -25,7 +26,7 @@ myst_enable_extensions = ["colon_fence", "fieldlist"]
 
 # Autodoc2 Configuration
 autodoc2_render_plugin = "myst"
-autodoc2_packages = ["../pconfig"]
+autodoc2_packages = [{"path": "../pconfig", "auto_mode": False}]
 
 autodoc2_hidden_objects = ["inherited", "dunder", "private"]
 autodoc2_sort_names = True
@@ -36,3 +37,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
+html_theme_options = {
+    "titles_only": True,
+}
+
