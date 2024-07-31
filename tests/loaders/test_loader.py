@@ -41,12 +41,12 @@ def test_loader():
 def test_raise_not_implemented_error():
     from pconfig.loaders.loader import ConfigLoader
 
+    # skipcq: PYL-W0223
     class LoaderTest(ConfigLoader):
         calls = 0
 
     with pytest.raises(NotImplementedError) as err:
 
-        # skipcq: PYL-W0223
         class Config(ConfigBase):
             name = None
 
