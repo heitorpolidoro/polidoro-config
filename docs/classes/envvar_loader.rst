@@ -5,6 +5,7 @@ ConfigEnvVarLoader
 .. autoclass:: ConfigEnvVarLoader
   :exclude-members: order
   :members:
+  :show-inheritance:
 
   .. attribute:: order
     :type: int

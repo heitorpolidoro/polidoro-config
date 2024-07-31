@@ -1,17 +1,12 @@
 Loaders
 =======
 
-.. currentmodule:: pconfig.loaders
 
-ConfigLoader
+Loaders
 ------------
 
-.. autoclass:: ConfigLoader
-  :exclude-members: order
-  :members:
-
-  .. autoattribute:: order
-    :no-value:
+.. currentmodule:: pconfig.loaders.loader
+.. autofunction:: load_configs
 
 
 Default Loaders
@@ -20,6 +15,7 @@ Default Loaders
 .. toctree::
   :hidden:
 
+  loader
   envvar_loader
   dotenv_loader
   yaml_loader

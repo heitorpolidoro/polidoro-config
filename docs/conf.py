@@ -30,6 +30,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx_copybutton",
     "sphinx.ext.napoleon",
+    "sphinx.ext.inheritance_diagram",
 ]
 myst_enable_extensions = ["colon_fence", "fieldlist"]
 
@@ -59,6 +60,7 @@ def generate_class_doc(clazz):
 
 .. currentmodule:: $module
 .. autoclass:: $className
+  :show-inheritance:
   :members:
 """
     return Template(template).substitute(

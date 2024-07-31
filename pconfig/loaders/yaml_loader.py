@@ -23,7 +23,7 @@ class ConfigYAMLLoader(ConfigLoader):
     order = 100
 
     @classmethod
-    def load_config(cls, file_path: str) -> dict[str, object]:
+    def load_config(cls, file_path: str, **_kwargs) -> dict[str, object]:
         """Load the configuration fom a YAML file.
 
         Args:

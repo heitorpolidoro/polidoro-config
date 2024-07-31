@@ -7,7 +7,7 @@ environment variables, configuration files (e.g., YAML).
 
 import logging
 
-from pconfig.loaders.loader import ConfigLoader
+from pconfig.loaders.loader import load_configs
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ class _ConfigMeta(type):
         params = {
             key: value for key, value in vars(cls).items() if not key.startswith("__")
         }
-        config = ConfigLoader.load(**params)
+        config = load_configs(**params)
         for attr, value in (attributes or {}).items():
             setattr(cls, attr, config.get(attr, value))
 

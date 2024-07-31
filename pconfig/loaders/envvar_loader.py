@@ -15,7 +15,7 @@ class ConfigEnvVarLoader(ConfigLoader):
     order = -sys.maxsize
 
     @classmethod
-    def load_config(cls) -> dict[str, object]:
+    def load_config(cls, **_kwargs) -> dict[str, object]:
         """Return the environment variables as `dict`
 
         Returns:

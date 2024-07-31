@@ -7,7 +7,6 @@ from tests.conftest import change_dir, import_error
 
 
 def test_load_dotenv(tmp_path):
-
     dotenv_file = tmp_path / ".env"
     dotenv_file.write_text("LOAD_ENV_VAR=load_value")
 
