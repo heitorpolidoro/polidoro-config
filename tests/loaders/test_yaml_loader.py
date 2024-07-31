@@ -2,6 +2,7 @@ import pytest
 
 from pconfig.config import ConfigBase
 from pconfig.error import ConfigError
+
 # noinspection PyUnresolvedReferences
 from tests.conftest import change_dir, import_error
 
