@@ -9,7 +9,7 @@ __all__ = [
     "ConfigLoader",
 ]
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 from pconfig.config import ConfigBase
 from pconfig.loaders import ConfigLoader

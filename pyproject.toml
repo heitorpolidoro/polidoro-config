@@ -26,7 +26,7 @@ dynamic = ["version", "dependencies"]
 
 [project.urls]
 "Homepage" = "https://github.com/heitorpolidoro/polidoro-config"
-"Source" = "https://polidoro-config.readthedocs.io/"
+"Documentation" = "https://polidoro-config.readthedocs.io/"
 
 [tool.setuptools.dynamic]
 version = {attr = "pconfig.__version__"}
