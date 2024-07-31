@@ -14,12 +14,10 @@ from pconfig import loaders
 def modules_to_reload():
     modules = [
         name
-        for _, name, _ in pkgutil.iter_modules(loaders.__path__) if name != 'loader'
+        for _, name, _ in pkgutil.iter_modules(loaders.__path__)
+        if name != "loader"
     ]
-    return [
-        getattr(loaders, name)
-        for name in ["loader"] + modules
-    ]
+    return [getattr(loaders, name) for name in ["loader"] + modules]
 
 
 @pytest.fixture(autouse=True)

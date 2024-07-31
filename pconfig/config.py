@@ -22,7 +22,9 @@ class _ConfigMeta(type):
         attributes: dict[str, object] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
-        params = {key: value for key, value in vars(cls).items() if not key.startswith("__")}
+        params = {
+            key: value for key, value in vars(cls).items() if not key.startswith("__")
+        }
         config = ConfigLoader.load(**params)
         for attr, value in (attributes or {}).items():
             setattr(cls, attr, config.get(attr, value))

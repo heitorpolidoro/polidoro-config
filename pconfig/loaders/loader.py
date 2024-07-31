@@ -44,12 +44,16 @@ class ConfigLoader:
             reverse=True,
         ):
             signature = inspect.signature(loader.load_config)
-            if (filtered_params := ConfigLoader._get_parameters(params, signature)) is not None:
+            if (
+                filtered_params := ConfigLoader._get_parameters(params, signature)
+            ) is not None:
                 config.update(loader.load_config(**filtered_params))
         return config
 
     @staticmethod
-    def _get_parameters(params: dict[str, object], signature: inspect.Signature) -> dict[str, object] | None:
+    def _get_parameters(
+        params: dict[str, object], signature: inspect.Signature
+    ) -> dict[str, object] | None:
         """
         Returns the parameters that the method needs or accepts that are in `params` or
         None if the method needs a parameter that is not in `params`
@@ -65,7 +69,10 @@ class ConfigLoader:
         for param_name, param in signature.parameters.items():
             if param_name in params:
                 filtered_params[param_name] = params.get(param_name)
-            elif param.kind not in {param.VAR_POSITIONAL, param.VAR_KEYWORD} and param.default == param.empty:
+            elif (
+                param.kind not in {param.VAR_POSITIONAL, param.VAR_KEYWORD}
+                and param.default == param.empty
+            ):
                 return None
         return filtered_params
 

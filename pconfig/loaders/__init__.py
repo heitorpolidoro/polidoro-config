@@ -13,5 +13,5 @@ __all__ = [
 
 from pconfig.loaders.dotenv_loader import ConfigDotEnvLoader
 from pconfig.loaders.envvar_loader import ConfigEnvVarLoader
-from pconfig.loaders.yaml_loader import ConfigYAMLLoader
 from pconfig.loaders.loader import ConfigLoader
+from pconfig.loaders.yaml_loader import ConfigYAMLLoader

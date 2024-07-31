@@ -66,5 +66,3 @@ def test_load_with_not_eligible_file_path(tmp_path):
             LOAD_ENV_VAR = None
 
         assert ConfigTest.LOAD_ENV_VAR is None
-
-

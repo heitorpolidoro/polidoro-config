@@ -30,9 +30,7 @@ class ConfigDotEnvLoader(ConfigLoader):
     order = 0
 
     @classmethod
-    def load_config(
-        cls, file_path: str | None = None
-    ) -> dict[str, object]:
+    def load_config(cls, file_path: str | None = None) -> dict[str, object]:
         """Load a .env file into environment variables.
 
         Args:
