@@ -36,7 +36,7 @@ Polidoro Config it is a configuration manager for you project
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.10)&logo=python&label=3.10)<br/>![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.11)&logo=python&label=3.11)<br/>![GitHub branch check runs](https://img.shields.io/github/check-runs/heitorpolidoro/polidoro-config/master?nameFilter=Code%20Quality%20%2F%20Tests%20(3.12)&logo=python&label=3.12) |
 
-## Usage
+## Basic Usage
 
 Create a class inheriting from ConfigBase
 
@@ -68,3 +68,5 @@ default_value
 >>> MY_VAR="new_value" python script.py
 new_value
 ```
+
+For more information see the [Documentation](https://polidoro-config.readthedocs.io/)
