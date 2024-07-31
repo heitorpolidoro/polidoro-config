@@ -3,6 +3,7 @@ test_patterns = [
   '**/tests/**',
   '**/test_*.py',
 ]
+exclude_patterns = ["docs/**"]
 
 [[analyzers]]
 name = "test-coverage"
@@ -14,7 +15,6 @@ name = "python"
 runtime_version = "3.x.x"
 max_line_length = 120
 type_checker = "mypy"
-exclude_patterns = ["docs/*"]
 
 [[transformers]]
 name = "black"
