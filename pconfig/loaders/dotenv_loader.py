@@ -6,6 +6,8 @@ This module provides functionality for load configuration from dotenv files
 import logging
 import os
 
+from dotenv.main import StrPath
+
 from pconfig.loaders.envvar_loader import ConfigEnvVarLoader
 from pconfig.loaders.loader import ConfigLoader
 
@@ -25,14 +27,25 @@ except ImportError:
 class ConfigDotEnvLoader(ConfigLoader):
     """Load a .env file into environment variables."""
 
-    order = 1
+    order = 0
 
     @classmethod
-    def load_config(cls, config_class: "ConfigBase") -> dict[str, object]:
+    def load_config(
+        cls, file_path: str | None = None
+    ) -> dict[str, object]:
+        """Load a .env file into environment variables.
+
+        Args:
+            file_path: .env style file path. Optional.
+
+        Returns:
+            The configuration `dict`
         """
-        Load a .env file into environment variables.
-        :return: A boolean indicating whether the .env file is successfully loaded.
-        """
-        if dotenv and os.path.isfile(".env"):
-            dotenv.load_dotenv(os.getenv("CONFIG_ENV"))
-        return ConfigEnvVarLoader.load_config(config_class)
+        file_path = os.getenv("CONFIG_ENV", file_path or ".env")
+        config = {}
+        if dotenv and os.path.isfile(file_path):
+            current = dict(os.environ)
+            dotenv.load_dotenv(file_path)
+            config = ConfigEnvVarLoader.load_config()
+            config = dict(set(config.items()) - set(current.items()))
+        return config

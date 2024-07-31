@@ -14,7 +14,7 @@ def test_loader():
     class LoaderTest0(ConfigLoader):
 
         @classmethod
-        def load_config(cls, _config_class) -> dict[str, object]:
+        def load_config(cls) -> dict[str, object]:
             loader_calls.append("LoaderTest0")
             return {"name": "value0"}
 
@@ -22,7 +22,7 @@ def test_loader():
         order = 100
 
         @classmethod
-        def load_config(cls, _config_class) -> dict[str, object]:
+        def load_config(cls) -> dict[str, object]:
             loader_calls.append("LoaderTest1")
             return {"name": "value1"}
 

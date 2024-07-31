@@ -8,10 +8,10 @@ __all__ = [
     "ConfigLoader",
     "ConfigEnvVarLoader",
     "ConfigDotEnvLoader",
-    "ConfigFileLoader",
+    "ConfigYAMLLoader",
 ]
 
 from pconfig.loaders.dotenv_loader import ConfigDotEnvLoader
 from pconfig.loaders.envvar_loader import ConfigEnvVarLoader
-from pconfig.loaders.file_loader import ConfigFileLoader
+from pconfig.loaders.yaml_loader import ConfigYAMLLoader
 from pconfig.loaders.loader import ConfigLoader

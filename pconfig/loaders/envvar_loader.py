@@ -15,14 +15,10 @@ class ConfigEnvVarLoader(ConfigLoader):
     order = -sys.maxsize
 
     @classmethod
-    def load_config(cls, config_class: "ConfigBase") -> dict[str, object]:
-        """
-         Return the environment variables as _dict_
+    def load_config(cls) -> dict[str, object]:
+        """Return the environment variables as `dict`
 
-        :param config_class: The configuration class to get some parameters from
-        :type config_class: ConfigBase
-
-        :return: The consolidated configuration _dict_
-        :rtype: dict[str, object]
+        Returns:
+            The configuration `dict`
         """
         return dict(os.environ)

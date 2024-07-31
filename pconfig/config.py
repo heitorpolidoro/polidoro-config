@@ -6,7 +6,6 @@ environment variables, configuration files (e.g., YAML).
 """
 
 import logging
-from pathlib import PosixPath
 
 from pconfig.loaders.loader import ConfigLoader
 
@@ -23,21 +22,22 @@ class _ConfigMeta(type):
         attributes: dict[str, object] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
-        config = ConfigLoader.load(cls)
+        params = {key: value for key, value in vars(cls).items() if not key.startswith("__")}
+        config = ConfigLoader.load(**params)
         for attr, value in (attributes or {}).items():
             setattr(cls, attr, config.get(attr, value))
 
 
 class ConfigBase(metaclass=_ConfigMeta):
-    """
-    A base class for configuration classes.
+    """A base class for configuration classes.
     To use it, create a subclass and define your settings as class attributes.
+    ::
 
-    ```python
-    class Config(ConfigBase):
-        DB_HOST = 'localhost'
-        ENVIRONMENT = 'development'
-        ...
-    ```
-    These attributes will be automatically overridden by environment variables of the same name.
+        class Config(ConfigBase):
+            DB_HOST = 'localhost'
+            ENVIRONMENT = 'development'
+            ...
+
+    These attributes will be overridden in the class creation calling the
+    :meth:`ConfigLoader.load() <pconfig.loaders.ConfigLoader.load>` method.
     """
