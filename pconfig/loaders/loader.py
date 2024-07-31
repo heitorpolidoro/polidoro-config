@@ -8,8 +8,6 @@ import logging
 import sys
 from abc import abstractmethod
 
-from pconfig.error import MissingParameters
-
 logger = logging.getLogger(__name__)
 
 

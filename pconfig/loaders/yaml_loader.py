@@ -4,7 +4,6 @@ This module provides functionality for load configuration from file
 """
 
 import logging
-from pathlib import PosixPath
 
 from pconfig.error import ConfigError
 from pconfig.loaders.loader import ConfigLoader

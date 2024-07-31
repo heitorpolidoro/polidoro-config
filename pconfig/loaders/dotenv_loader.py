@@ -6,8 +6,6 @@ This module provides functionality for load configuration from dotenv files
 import logging
 import os
 
-from dotenv.main import StrPath
-
 from pconfig.loaders.envvar_loader import ConfigEnvVarLoader
 from pconfig.loaders.loader import ConfigLoader
 

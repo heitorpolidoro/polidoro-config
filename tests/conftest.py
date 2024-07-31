@@ -59,11 +59,3 @@ def import_error(import_to_fail):
         yield
 
 
-#
-# def import_error(name_to_fail):
-#     def wrapper(name, *args, **kwargs):
-#         if name == name_to_fail:
-#             raise ImportError
-#         return original_import(name, *args, **kwargs)
-#
-#     return wrapper
