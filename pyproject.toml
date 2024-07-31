@@ -27,7 +27,7 @@ dynamic = ["version", "dependencies"]
 "Source" = "https://polidoro-config.readthedocs.io/"
 
 [tool.setuptools.dynamic]
-version = {attr = ".__version__"}
+version = {attr = "pconfig.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
 [tool.coverage.run]
