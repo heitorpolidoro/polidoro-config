@@ -30,7 +30,6 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx_copybutton",
     "sphinx.ext.napoleon",
-    "sphinx.ext.inheritance_diagram",
 ]
 myst_enable_extensions = ["colon_fence", "fieldlist"]
 
@@ -47,8 +46,6 @@ html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     "titles_only": True,
 }
-
-html_static_path = ["_static"]
 
 napoleon_google_docstring = True
 autodoc_member_order = "bysource"
