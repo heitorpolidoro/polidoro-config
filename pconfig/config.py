@@ -6,36 +6,10 @@ environment variables, configuration files (e.g., YAML).
 """
 
 import logging
-import os
+
+from pconfig.loaders.loader import load_configs
 
 logger = logging.getLogger(__name__)
-
-try:
-    import dotenv
-except ImportError:
-    dotenv = None
-    logger.info(
-        "There's a .env file present but python-dotenv is not installed. Run 'pip install python-dotenv' to use it."
-    )
-
-
-class ConfigError(AttributeError):
-    """Raised when the config attribute is not found."""
-
-
-class ConfigLoader:
-    """Loads configuration data from various sources like .env files or environment variables."""
-
-    @staticmethod
-    def load_dotenv(dotenv_path: str | None = None) -> bool:
-        """
-        Load a .env file into environment variables.
-        :return: A boolean indicating whether the .env file is successfully loaded.
-        """
-        if dotenv and os.path.isfile(".env"):
-            dotenv.load_dotenv(dotenv_path)
-            return True
-        return False
 
 
 class _ConfigMeta(type):
@@ -48,19 +22,24 @@ class _ConfigMeta(type):
         attributes: dict[str, object] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
-        ConfigLoader.load_dotenv()
+        params = {
+            key: value for key, value in vars(cls).items() if not key.startswith("__")
+        }
+        config = load_configs(**params)
         for attr, value in (attributes or {}).items():
-            if attr.isupper():
-                setattr(cls, attr, os.getenv(attr, value))
+            setattr(cls, attr, config.get(attr, value))
 
 
 class ConfigBase(metaclass=_ConfigMeta):
-    """
-    A base class for configuration classes.
-    To use, create a subclass and define your settings as class attributes.
-    Ex:
-    class Config(ConfigBase):
-        NAME1 = VALUE1
-        NAME2 = VALUE2
-    These attributes will be automatically overridden by environment variables of the same name.
+    """A base class for configuration classes.
+    To use it, create a subclass and define your settings as class attributes.
+    ::
+
+        class Config(ConfigBase):
+            DB_HOST = 'localhost'
+            ENVIRONMENT = 'development'
+            ...
+
+    These attributes will be overridden in the class creation calling the
+    :meth:`ConfigLoader.load() <pconfig.loaders.ConfigLoader.load>` method.
     """
