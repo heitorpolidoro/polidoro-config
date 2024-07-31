@@ -46,6 +46,7 @@ def test_raise_not_implemented_error():
 
     with pytest.raises(NotImplementedError) as err:
 
+        # skipcq: PYL-W0223
         class Config(ConfigBase):
             name = None
 
