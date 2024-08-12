@@ -47,7 +47,9 @@ class _ConfigMeta(type):
             setattr(cls, attr, new_value)
 
     def __repr__(self) -> str:
-        attributes = ', '.join(f'{k}={repr(v)}' for k, v in self.__dict__.items() if not k.startswith("_"))
+        attributes = ", ".join(
+            f"{k}={repr(v)}" for k, v in self.__dict__.items() if not k.startswith("_")
+        )
         return f"{self.__name__}({attributes})"
 
 

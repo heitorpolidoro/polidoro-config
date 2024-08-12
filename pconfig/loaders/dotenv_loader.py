@@ -44,7 +44,7 @@ class ConfigDotEnvLoader(ConfigLoader):
 
         $ python script.py # with `.env` file in the same path
         dotenv_value
-  """
+    """
 
     order = 0
 

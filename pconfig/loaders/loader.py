@@ -76,7 +76,7 @@ class ConfigLoader:
             def load_config(cls, **_kwargs) -> dict[str, object]:
                 return {"value1": 1, "value2": 2}
 
-"""
+    """
 
     order: int = sys.maxsize
     """ The order in which loaders will be called. Biggest first."""

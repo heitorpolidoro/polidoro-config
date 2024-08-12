@@ -29,7 +29,7 @@ class ConfigEnvVarLoader(ConfigLoader):
 
         $ MY_VAR="new_value" python script.py
         new_value
-  """
+    """
 
     order = -sys.maxsize
 
