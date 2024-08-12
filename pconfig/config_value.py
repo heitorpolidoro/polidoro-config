@@ -4,7 +4,9 @@ This module provides functionality for managing configurations
 It allows you to load configuration settings from various sources such as
 environment variables, configuration files (e.g., YAML).
 """
+from typing_extensions import TypeVar
 
+ConfigValueType = TypeVar("ConfigValue")
 
 class ConfigValue:
     """
@@ -29,20 +31,20 @@ class ConfigValue:
 
     def update(
         self, values: dict[str, object | dict] | object
-    ) -> "ConfigValue" | object:
+    ) -> ConfigValueType | object:
         if not isinstance(values, dict):
             return values
         for name, value in values.items():
-            if isinstance(self[name], ConfigValue):
-                value = self[name].update(value)
+            if isinstance((self_value:=self[name]), ConfigValue):
+                value = self_value.update(value)
             self._params[name] = value
         return self
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({', '.join(f'{k}={v}' for k, v in self._params.items())})"
 
-    def __getattr__(self, item: str) -> object | "ConfigValue":
+    def __getattr__(self, item: str) -> ConfigValueType | object:
         return self._params[item]
 
-    def __getitem__(self, item: str) -> object | "ConfigValue":
+    def __getitem__(self, item: str) -> ConfigValueType | object:
         return self._params[item]
