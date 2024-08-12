@@ -5,8 +5,6 @@ It allows you to load configuration settings from various sources such as
 environment variables, configuration files (e.g., YAML).
 """
 
-from typing import Self
-
 
 class ConfigValue:
     """
@@ -29,7 +27,7 @@ class ConfigValue:
     def __init__(self, **params) -> None:
         self._params = params
 
-    def update(self, values: dict[str, object | dict]) -> Self:
+    def update(self, values: dict[str, object | dict] | object) -> "ConfigValue" | object:
         if not isinstance(values, dict):
             return values
         for name, value in values.items():
@@ -41,8 +39,8 @@ class ConfigValue:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({', '.join(f'{k}={v}' for k, v in self._params.items())})"
 
-    def __getattr__(self, item: str) -> object | Self:
+    def __getattr__(self, item: str) -> object | "ConfigValue":
         return self._params[item]
 
-    def __getitem__(self, item: str) -> object | Self:
+    def __getitem__(self, item: str) -> object | "ConfigValue":
         return self._params[item]
