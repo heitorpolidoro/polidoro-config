@@ -28,7 +28,7 @@ def test_repr():
 
     assert (
         str(ConfigTest)
-        == "ConfigTest(file_path='file_name', config=ConfigValue(var1=ConfigValue(var2=default)))"
+        == "ConfigTest(file_path='file_name', config=ConfigValue(var1=ConfigValue(var2='default')))"
     )
 
 
