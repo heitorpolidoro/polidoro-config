@@ -57,7 +57,7 @@ class ConfigValue:
         return self
 
     def __repr__(self) -> str:
-        attributes = ', '.join(f'{k}={repr(v)}' for k, v in self._params.items())
+        attributes = ", ".join(f"{k}={repr(v)}" for k, v in self._params.items())
         return f"{self.__class__.__name__}({attributes})"
 
     def __getattr__(self, item: str) -> ConfigValueType | object:
