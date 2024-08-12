@@ -12,15 +12,16 @@ logger = logging.getLogger(__name__)
 
 
 def load_configs(**params) -> dict[str, object]:
-    """Calls the `load_config` for all the ConfigLoader child classes,
-    returning the consolidated configuration `dict`.
+    """Calls the ``load_config`` for all the ConfigLoader child classes,
+    returning the consolidated configuration ``dict``.
 
     Args:
         params: Key word arguments to be passed as parameters to the
-            :meth:`ConfigLoader.load() <pconfig.loaders.ConfigLoader.load>` loader method
+            :meth:`load_config() <pconfig.loaders.loader.ConfigLoader.load_config>`
+            method from each loader
 
     Returns:
-        dict[str, object]: The consolidated configuration `dict`
+        dict[str, object]: The consolidated configuration ``dict``
     """
     config = {}
     for loader in sorted(
@@ -38,8 +39,8 @@ def _get_parameters(
     params: dict[str, object], signature: inspect.Signature
 ) -> dict[str, object] | None:
     """
-    Returns the parameters that the method needs or accepts that are in `params` or
-    None if the method needs a parameter that is not in `params`
+    Returns the parameters that the method needs or accepts that are in ``params`` or
+    None if the method needs a parameter that is not in ``params``
 
     Args:
         params: The parameters to be filtered
@@ -64,10 +65,18 @@ class ConfigLoader:
     """Loader base class.
 
     To create a configuration loader, create a subclass and implement the
-    :meth:`ConfigLoader.load() <pconfig.loaders.ConfigLoader.load>` method
-    returning a `dict` of configuration values.
+    :meth:`load_config() <pconfig.loaders.loader.ConfigLoader.load_config>` method
+    returning a ``dict`` of configuration values.
+    ::
 
-    """
+        class ConfigCustomLoader(ConfigLoader):
+            order = 1  # Optional, leaving it blank will run first
+
+            @classmethod
+            def load_config(cls, **_kwargs) -> dict[str, object]:
+                return {"value1": 1, "value2": 2}
+
+"""
 
     order: int = sys.maxsize
     """ The order in which loaders will be called. Biggest first."""
@@ -76,9 +85,9 @@ class ConfigLoader:
     @abstractmethod
     def load_config(cls, **kwargs) -> dict[str, object]:
         """
-        Method to be implemented by the child class. Must return a `dict` of configuration values.
+        Method to be implemented by the child class. Must return a ``dict`` of configuration values.
 
         Returns:
-            dict[str, object]: The loaded configuration `dict`
+            dict[str, object]: The loaded configuration ``dict``
         """
         raise NotImplementedError(f"{cls.__name__} must implement this method.")

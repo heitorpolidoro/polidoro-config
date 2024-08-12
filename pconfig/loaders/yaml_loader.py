@@ -18,7 +18,27 @@ except ImportError:
 
 
 class ConfigYAMLLoader(ConfigLoader):
-    """Load configuration from YAML file."""
+    """
+    Load configuration from YAML file.
+    ::
+
+        from pconfig import ConfigBase
+
+        class Config(ConfigBase):
+          file_path = "my_config.yml"
+          MY_VAR = 'default_value'
+
+        print(Config.MY_VAR)
+
+    .. code-block:: bash
+
+        # my_config.yml file
+        MY_VAR: 'yaml_value'
+
+        $ python script.py
+        yaml_value
+
+    """
 
     order = 100
 
@@ -30,7 +50,7 @@ class ConfigYAMLLoader(ConfigLoader):
             file_path: YAML file path
 
         Returns:
-            The configuration `dict`
+            The configuration ``dict``
         """
         if yaml is None:
             raise ConfigError(

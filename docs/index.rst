@@ -3,8 +3,6 @@ Polidoro Config
 
 Polidoro Config it is a configuration manager for you project
 
-## Usage
-
 .. toctree::
   :hidden:
 
@@ -43,3 +41,5 @@ When the class is created will load the configuration values from the :doc:`clas
 
   $ MY_VAR="new_value" python script.py
   new_value
+
+See :class:`ConfigBase <pconfig.config.ConfigBase>` documentation for a more interesting usage

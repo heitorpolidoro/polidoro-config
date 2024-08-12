@@ -1,6 +1,7 @@
 import pytest
+from pydantic import BaseModel
 
-from pconfig.config import ConfigBase
+from pconfig.config import ConfigBase, ConfigValue
 from pconfig.error import ConfigError
 
 # noinspection PyUnresolvedReferences
@@ -63,3 +64,83 @@ def test_load_with_not_eligible_file_path(tmp_path):
             LOAD_ENV_VAR = None
 
         assert ConfigTest.LOAD_ENV_VAR is None
+
+
+def test_load_yaml_config(tmp_path):
+    yaml_file = tmp_path / ".yaml"
+    yaml_file.write_text(
+        """config: 
+        var1: 1"""
+    )
+
+    with change_dir(tmp_path):
+
+        class ConfigTest(ConfigBase):
+            file_path = yaml_file.name
+            config = ConfigValue(var1=None, var2="default")
+
+        assert ConfigTest.config.var1 == 1
+        assert ConfigTest.config.var2 == "default"
+
+
+def test_load_yaml_complex_config(tmp_path):
+    yaml_file = tmp_path / ".yaml"
+    yaml_file.write_text(
+        """config: 
+        var1: 
+            var2: 2"""
+    )
+
+    with change_dir(tmp_path):
+
+        class ConfigTest(ConfigBase):
+            file_path = yaml_file.name
+            config = ConfigValue(var1=ConfigValue(var2="default"))
+
+        assert ConfigTest.config.var1.var2 == 2
+
+
+def test_load_yaml_wrong_complex_config(tmp_path):
+    yaml_file = tmp_path / ".yaml"
+    yaml_file.write_text(
+        """config: 
+        var1: 1"""
+    )
+
+    with change_dir(tmp_path):
+
+        class ConfigTest(ConfigBase):
+            file_path = yaml_file.name
+            config = ConfigValue(var1=ConfigValue(var2="default"))
+
+        assert ConfigTest.config.var1 == 1
+
+
+def test_load_yaml_complex_config_with_pydantic(tmp_path):
+    yaml_file = tmp_path / ".yaml"
+    yaml_file.write_text(
+        """config: 
+        var1: "1"
+        another_config:
+            another_var2: "2" """
+    )
+
+    with change_dir(tmp_path):
+
+        class AnotherConfig(BaseModel):
+            another_var1: str = "default1"
+            another_var2: str = "default2"
+
+        class MyConfig(BaseModel):
+            var1: str = "default1"
+            var2: str = "default2"
+            another_config: AnotherConfig = AnotherConfig()
+
+        class ConfigTest(ConfigBase):
+            file_path = yaml_file.name
+            config = MyConfig()
+
+        assert ConfigTest.config.var1 == "1"
+        assert ConfigTest.config.var2 == "default2"
+        assert ConfigTest.config.another_config.another_var1 == "default1"
+        assert ConfigTest.config.another_config.another_var2 == "2"

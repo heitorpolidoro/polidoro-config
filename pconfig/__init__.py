@@ -7,9 +7,11 @@ It holds all the public pconfig.config classes
 __all__ = [
     "ConfigBase",
     "ConfigLoader",
+    "ConfigValue",
 ]
 
 __version__ = "0.1.5"
 
 from pconfig.config import ConfigBase
+from pconfig.config_value import ConfigValue
 from pconfig.loaders import ConfigLoader

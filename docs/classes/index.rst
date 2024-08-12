@@ -6,3 +6,4 @@ Classes
 
   configbase
   loaders
+  configvalue

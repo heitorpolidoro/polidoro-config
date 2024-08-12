@@ -23,19 +23,40 @@ except ImportError:
 
 
 class ConfigDotEnvLoader(ConfigLoader):
-    """Load a .env file into environment variables."""
+    """
+    Load a ``.env`` file into environment variables.
+    ::
+
+        from pconfig import ConfigBase
+
+        class Config(ConfigBase):
+          MY_VAR = 'default_value'
+
+        print(Config.MY_VAR)
+
+    .. code-block:: bash
+
+        $ python script.py # without any `.env` file
+        default_value
+
+        # .env file
+        MY_VAR=dotenv_value
+
+        $ python script.py # with `.env` file in the same path
+        dotenv_value
+  """
 
     order = 0
 
     @classmethod
     def load_config(cls, file_path: str | None = None, **_kwargs) -> dict[str, object]:
-        """Load a .env file into environment variables.
+        """Return the ``.env`` content as ``dict``.
 
         Args:
             file_path: .env style file path. Optional.
 
         Returns:
-            The configuration `dict`
+            The configuration ``dict``
         """
         file_path = os.getenv("CONFIG_ENV", file_path or ".env")
         config = {}
