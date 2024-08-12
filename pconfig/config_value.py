@@ -27,7 +27,9 @@ class ConfigValue:
     def __init__(self, **params) -> None:
         self._params = params
 
-    def update(self, values: dict[str, object | dict] | object) -> "ConfigValue" | object:
+    def update(
+        self, values: dict[str, object | dict] | object
+    ) -> "ConfigValue" | object:
         if not isinstance(values, dict):
             return values
         for name, value in values.items():
