@@ -39,14 +39,14 @@ class _ConfigMeta(type):
             new_value = config.get(attr, value)
             if isinstance(value, ConfigValue):
                 if not isinstance(new_value, ConfigValue):
-                    if not isinstance(new_value, dict):
+                    if isinstance(new_value, str):
                         new_value = json.loads(new_value)
                     new_value = value.update(new_value)
             elif BaseModel and isinstance(value, BaseModel):
                 new_value = value.__class__.model_validate(new_value)
             setattr(cls, attr, new_value)
 
-    def __repr__(cls) -> str:
+    def __repr__(cls: "_ConfigMeta") -> str:
         attributes = ", ".join(
             f"{k}={repr(v)}" for k, v in cls.__dict__.items() if not k.startswith("_")
         )
