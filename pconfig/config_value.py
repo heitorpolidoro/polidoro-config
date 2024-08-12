@@ -34,6 +34,20 @@ class ConfigValue:
     def update(
         self, values: dict[str, object | dict] | object
     ) -> ConfigValueType | object:
+        """
+        Update the configuration values with new values.
+
+        :param values: A dictionary of new values to update the configuration.
+                       The keys are the parameter names and the values are the
+                       corresponding new values.
+
+                       Each value can be one of the following:
+                       - An object of any type, which will be directly set as the new value.
+                       - Another dictionary, representing nested configuration values.
+
+        :return: The updated configuration object.
+                 If the input values are not a dictionary, the original configuration object is returned.
+        """
         if not isinstance(values, dict):
             return values
         for name, value in values.items():
