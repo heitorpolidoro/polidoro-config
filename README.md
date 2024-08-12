@@ -69,4 +69,16 @@ default_value
 new_value
 ```
 
+If you have the [`python-dotenv`](https://pypi.org/project/python-dotenv/) installed will load the `.env` automatically.
+Also, you can load from a `.yaml` file setting the file path in the `Config` class:
+```python
+# script.py
+from pconfig import ConfigBase
+
+class Config(ConfigBase):
+	file_path = "my_config.yml"
+	MY_VAR = 'default_value'
+
+```
+
 For more information see the [Documentation](https://polidoro-config.readthedocs.io/)

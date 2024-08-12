@@ -10,15 +10,34 @@ from pconfig.loaders.loader import ConfigLoader
 
 
 class ConfigEnvVarLoader(ConfigLoader):
-    """Load the configuration values from environment variables."""
+    """
+    Load the configuration values from environment variables.
+    ::
+
+        # script.py
+        from pconfig import ConfigBase
+
+        class Config(ConfigBase):
+          MY_VAR = 'default_value'
+
+        print(Config.MY_VAR)
+
+    .. code-block:: bash
+
+        $ python script.py
+        default_value
+
+        $ MY_VAR="new_value" python script.py
+        new_value
+    """
 
     order = -sys.maxsize
 
     @classmethod
     def load_config(cls, **_kwargs) -> dict[str, object]:
-        """Return the environment variables as `dict`
+        """Return the environment variables as ``dict``
 
         Returns:
-            The configuration `dict`
+            The configuration ``dict``
         """
         return dict(os.environ)
