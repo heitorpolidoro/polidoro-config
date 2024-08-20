@@ -70,13 +70,6 @@ class _ConfigMeta(type):
             return NotSet
         return attr
 
-    def raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
-        """Raise the MissingConfig error"""
-        raise MissingConfig(
-            f"The configuration {cls.__name__} has no configuration '{item}'"
-        )
-
-
 class ConfigBase(metaclass=_ConfigMeta):
     """A base class for configuration classes.
     To use it, create a subclass and define your settings as class attributes.
@@ -120,3 +113,12 @@ class ConfigBase(metaclass=_ConfigMeta):
     """
 
     raise_on_missing_config = True
+
+    @classmethod
+    def raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
+        """Raise the MissingConfig error"""
+        raise MissingConfig(
+            f"The configuration {cls.__name__} has no configuration '{item}'"
+        )
+
+
