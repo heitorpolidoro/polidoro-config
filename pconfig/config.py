@@ -70,8 +70,8 @@ class _ConfigMeta(type):
             return NotSet
         return attr
 
-    @classmethod
     def raise_missing_config_error(cls: "_ConfigMeta", item: str) -> NoReturn:
+        """Raise the MissingConfig error"""
         raise MissingConfig(
             f"The configuration {cls.__name__} has no configuration '{item}'"
         )
