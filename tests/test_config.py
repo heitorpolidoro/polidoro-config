@@ -3,7 +3,7 @@ import importlib
 import pytest
 from pydantic import BaseModel
 
-from pconfig import ConfigBase, config, NotSet
+from pconfig import ConfigBase, NotSet, config
 from pconfig.config_value import ConfigValue
 from pconfig.error import MissingConfig
 from tests.conftest import import_error
@@ -53,6 +53,7 @@ def test_repr_pydantic():
         "another_config=AnotherConfig(another_var1='default1', another_var2='default2')))"
     )
 
+
 def test_missing_config():
     class ConfigTest(ConfigBase):
         EXISTING_VAR: str = None
@@ -63,6 +64,7 @@ def test_missing_config():
         assert ConfigTest.VAR_WITHOUT_DEFAULT
     with pytest.raises(MissingConfig):
         assert ConfigTest.MY_MISSING_VAR
+
 
 def test_missing_config_global_dont_raise():
     class ConfigTest(ConfigBase):
@@ -76,6 +78,7 @@ def test_missing_config_global_dont_raise():
     assert bool(ConfigTest.VAR_WITHOUT_DEFAULT) is False
     assert ConfigTest.MY_MISSING_VAR == NotSet
     assert ConfigTest.CONFIG_VALUE == NotSet
+
 
 def test_missing_config_local_dont_raise():
     class ConfigTest(ConfigBase):

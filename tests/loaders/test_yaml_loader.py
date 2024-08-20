@@ -52,6 +52,7 @@ def test_load_with_falsy_file_path():
 
     assert ConfigTest.LOAD_ENV_VAR is None
 
+
 def test_load_without_file_path():
     class ConfigTest(ConfigBase):
         LOAD_ENV_VAR = None

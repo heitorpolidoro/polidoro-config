@@ -4,6 +4,7 @@ This module provides functionality for managing configurations
 It allows you to load configuration settings from various sources such as
 environment variables, configuration files (e.g., YAML).
 """
+
 from typing import Any
 
 from typing_extensions import TypeVar
@@ -33,9 +34,7 @@ class ConfigValue:
         self.raise_on_missing_config = raise_on_missing_config
         self.values = values
 
-    def update(
-        self, values: dict[str, Any | dict] | Any
-    ) -> ConfigValueType | Any:
+    def update(self, values: dict[str, Any | dict] | Any) -> ConfigValueType | Any:
         """
         Update the configuration values with new values.
 
