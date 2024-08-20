@@ -9,7 +9,7 @@ import json
 import logging
 from typing import Any, NoReturn
 
-from pconfig import NotSet
+from pconfig.notset import NotSet
 from pconfig.config_value import ConfigValue
 from pconfig.error import MissingConfig
 from pconfig.loaders.loader import load_configs
