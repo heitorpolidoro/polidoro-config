@@ -23,7 +23,7 @@ def test_config_from_env(monkeypatch):
     assert ConfigTest.config.var2 == "default"
 
 
-def test__complex_config_from_env(monkeypatch):
+def test_complex_config_from_env(monkeypatch):
     monkeypatch.setenv("config", '{"var1": {"var2": 2}}')
 
     class ConfigTest(ConfigBase):

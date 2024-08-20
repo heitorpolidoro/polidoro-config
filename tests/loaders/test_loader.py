@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 from pconfig.config import ConfigBase
@@ -13,7 +15,7 @@ def test_loader():
         calls = 0
 
         @classmethod
-        def load_config(cls) -> dict[str, object]:
+        def load_config(cls) -> dict[str, Any]:
             loader_calls.append("LoaderTest0")
             cls.calls += 1
             return {"name": "value0"}
@@ -23,7 +25,7 @@ def test_loader():
         calls = 0
 
         @classmethod
-        def load_config(cls) -> dict[str, object]:
+        def load_config(cls) -> dict[str, Any]:
             loader_calls.append("LoaderTest1")
             cls.calls += 1
             return {"name": "value1"}

@@ -5,6 +5,7 @@ This module provides functionality for load configuration from dotenv files
 
 import os
 import sys
+from typing import Any
 
 from pconfig.loaders.loader import ConfigLoader
 
@@ -34,7 +35,7 @@ class ConfigEnvVarLoader(ConfigLoader):
     order = -sys.maxsize
 
     @classmethod
-    def load_config(cls, **_kwargs) -> dict[str, object]:
+    def load_config(cls, **_kwargs) -> dict[str, Any]:
         """Return the environment variables as ``dict``
 
         Returns:

@@ -5,6 +5,7 @@ This module provides functionality for load configuration from dotenv files
 
 import logging
 import os
+from typing import Any
 
 from pconfig.loaders.envvar_loader import ConfigEnvVarLoader
 from pconfig.loaders.loader import ConfigLoader
@@ -49,7 +50,7 @@ class ConfigDotEnvLoader(ConfigLoader):
     order = 0
 
     @classmethod
-    def load_config(cls, file_path: str | None = None, **_kwargs) -> dict[str, object]:
+    def load_config(cls, file_path: str | None = None, **_kwargs) -> dict[str, Any]:
         """Return the ``.env`` content as ``dict``.
 
         Args:

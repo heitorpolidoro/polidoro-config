@@ -53,6 +53,13 @@ def test_load_with_falsy_file_path():
     assert ConfigTest.LOAD_ENV_VAR is None
 
 
+def test_load_without_file_path():
+    class ConfigTest(ConfigBase):
+        LOAD_ENV_VAR = None
+
+    assert ConfigTest.LOAD_ENV_VAR is None
+
+
 def test_load_with_not_eligible_file_path(tmp_path):
     yaml_file = tmp_path / ".not_yaml"
     yaml_file.write_text("LOAD_ENV_VAR: 'load_value'")

@@ -7,11 +7,12 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
 
-def load_configs(**params) -> dict[str, object]:
+def load_configs(**params) -> dict[str, Any]:
     """Calls the ``load_config`` for all the ConfigLoader child classes,
     returning the consolidated configuration ``dict``.
 
@@ -36,8 +37,8 @@ def load_configs(**params) -> dict[str, object]:
 
 
 def _get_parameters(
-    params: dict[str, object], signature: inspect.Signature
-) -> dict[str, object] | None:
+    params: dict[str, Any], signature: inspect.Signature
+) -> dict[str, Any] | None:
     """
     Returns the parameters that the method needs or accepts that are in ``params`` or
     None if the method needs a parameter that is not in ``params``
@@ -83,7 +84,7 @@ class ConfigLoader:
 
     @classmethod
     @abstractmethod
-    def load_config(cls, **kwargs) -> dict[str, object]:
+    def load_config(cls, **kwargs) -> dict[str, Any]:
         """
         Method to be implemented by the child class. Must return a ``dict`` of configuration values.
 

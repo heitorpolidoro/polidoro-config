@@ -7,9 +7,12 @@ environment variables, configuration files (e.g., YAML).
 
 import json
 import logging
+from typing import Any, NoReturn
 
 from pconfig.config_value import ConfigValue
+from pconfig.error import MissingConfig
 from pconfig.loaders.loader import load_configs
+from pconfig.notset import NotSet
 
 try:
     from pydantic import BaseModel
@@ -26,7 +29,7 @@ class _ConfigMeta(type):
         cls: type["ConfigBase"],
         name: str,
         bases: tuple[type] | None = None,
-        attributes: dict[str, object] | None = None,
+        attributes: dict[str, Any] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
         params = {
@@ -46,11 +49,26 @@ class _ConfigMeta(type):
                 new_value = value.__class__.model_validate(new_value)
             setattr(cls, attr, new_value)
 
-    def __repr__(cls: "_ConfigMeta") -> str:
+    def __repr__(cls: type["ConfigBase"]) -> str:
         attributes = ", ".join(
             f"{k}={repr(v)}" for k, v in cls.__dict__.items() if not k.startswith("_")
         )
         return f"{cls.__name__}({attributes})"
+
+    def __getattr__(cls: type["ConfigBase"], item: str) -> NotSet:
+        if item.startswith("__") or item.startswith("_pytest"):
+            raise AttributeError(item)
+        if cls.raise_on_missing_config:
+            cls.raise_missing_config_error(item)
+        return NotSet
+
+    def __getattribute__(cls: type["ConfigBase"], item: str) -> Any:
+        attr = super().__getattribute__(item)
+        if isinstance(attr, ConfigValue) and not attr.values:
+            if attr.raise_on_missing_config:
+                cls.raise_missing_config_error(item)
+            return NotSet
+        return attr
 
 
 class ConfigBase(metaclass=_ConfigMeta):
@@ -94,3 +112,12 @@ class ConfigBase(metaclass=_ConfigMeta):
     To enable the ``feat2``, for instance.
 
     """
+
+    raise_on_missing_config = True
+
+    @classmethod
+    def raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
+        """Raise the MissingConfig error"""
+        raise MissingConfig(
+            f"The configuration {cls.__name__} has no configuration '{item}'"
+        )
