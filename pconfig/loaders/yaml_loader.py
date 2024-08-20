@@ -4,6 +4,7 @@ This module provides functionality for load configuration from file
 """
 
 import logging
+from typing import Any
 
 from pconfig.error import ConfigError
 from pconfig.loaders.loader import ConfigLoader
@@ -43,7 +44,7 @@ class ConfigYAMLLoader(ConfigLoader):
     order = 100
 
     @classmethod
-    def load_config(cls, file_path: str, **_kwargs) -> dict[str, object]:
+    def load_config(cls, file_path: str, **_kwargs) -> dict[str, Any]:
         """Load the configuration fom a YAML file.
 
         Args:

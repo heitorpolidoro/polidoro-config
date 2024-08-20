@@ -7,8 +7,11 @@ environment variables, configuration files (e.g., YAML).
 
 import json
 import logging
+from typing import Any, NoReturn
 
+from pconfig import NotSet
 from pconfig.config_value import ConfigValue
+from pconfig.error import MissingConfig
 from pconfig.loaders.loader import load_configs
 
 try:
@@ -26,7 +29,7 @@ class _ConfigMeta(type):
         cls: type["ConfigBase"],
         name: str,
         bases: tuple[type] | None = None,
-        attributes: dict[str, object] | None = None,
+        attributes: dict[str, Any] | None = None,
     ) -> None:
         super().__init__(name, bases, attributes)
         params = {
@@ -51,6 +54,26 @@ class _ConfigMeta(type):
             f"{k}={repr(v)}" for k, v in cls.__dict__.items() if not k.startswith("_")
         )
         return f"{cls.__name__}({attributes})"
+
+    def __getattr__(cls: "_ConfigMeta", item: str) -> NotSet:
+        if item.startswith("__") or item.startswith("_pytest"):
+            raise AttributeError(item)
+        if cls.raise_on_missing_config:
+            cls.raise_missing_config_error(item)
+        return NotSet
+
+    def __getattribute__(cls: "_ConfigMeta", item: str) -> Any:
+        attr = super().__getattribute__(item)
+        if isinstance(attr, ConfigValue) and not attr.values:
+            if attr.raise_on_missing_config:
+                cls.raise_missing_config_error(item)
+            return NotSet
+        return attr
+
+    def raise_missing_config_error(cls: "_ConfigMeta", item: str) -> NoReturn:
+        raise MissingConfig(
+            f"The configuration {cls.__name__} has no configuration '{item}'"
+        )
 
 
 class ConfigBase(metaclass=_ConfigMeta):
@@ -94,3 +117,5 @@ class ConfigBase(metaclass=_ConfigMeta):
     To enable the ``feat2``, for instance.
 
     """
+
+    raise_on_missing_config = True

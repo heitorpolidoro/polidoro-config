@@ -8,10 +8,12 @@ __all__ = [
     "ConfigBase",
     "ConfigLoader",
     "ConfigValue",
+    "NotSet"
 ]
 
 __version__ = "0.1.5"
 
+from pconfig.notset import NotSet
 from pconfig.config import ConfigBase
 from pconfig.config_value import ConfigValue
 from pconfig.loaders import ConfigLoader
