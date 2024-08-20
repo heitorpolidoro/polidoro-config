@@ -26,7 +26,7 @@ class _ConfigMeta(type):
     """Metaclass that loads environment variables into class attributes."""
 
     def __init__(
-        cls: "ConfigBase",
+        cls: type["ConfigBase"],
         name: str,
         bases: tuple[type] | None = None,
         attributes: dict[str, Any] | None = None,
@@ -49,20 +49,20 @@ class _ConfigMeta(type):
                 new_value = value.__class__.model_validate(new_value)
             setattr(cls, attr, new_value)
 
-    def __repr__(cls: "ConfigBase") -> str:
+    def __repr__(cls: type["ConfigBase"]) -> str:
         attributes = ", ".join(
             f"{k}={repr(v)}" for k, v in cls.__dict__.items() if not k.startswith("_")
         )
         return f"{cls.__name__}({attributes})"
 
-    def __getattr__(cls: "ConfigBase", item: str) -> NotSet:
+    def __getattr__(cls: type["ConfigBase"], item: str) -> NotSet:
         if item.startswith("__") or item.startswith("_pytest"):
             raise AttributeError(item)
         if cls.raise_on_missing_config:
             cls.raise_missing_config_error(item)
         return NotSet
 
-    def __getattribute__(cls: "ConfigBase", item: str) -> Any:
+    def __getattribute__(cls: type["ConfigBase"], item: str) -> Any:
         attr = super().__getattribute__(item)
         if isinstance(attr, ConfigValue) and not attr.values:
             if attr.raise_on_missing_config:
@@ -70,7 +70,7 @@ class _ConfigMeta(type):
             return NotSet
         return attr
 
-    def raise_missing_config_error(cls: "ConfigBase", item: str) -> NoReturn:
+    def raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
         """Raise the MissingConfig error"""
         raise MissingConfig(
             f"The configuration {cls.__name__} has no configuration '{item}'"
