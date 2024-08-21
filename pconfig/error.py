@@ -6,7 +6,7 @@ This module contains all the exceptions for pconfig.
 
 
 class ConfigError(AttributeError):
-    """Raised when the config attribute is not found."""
+    """Raised when a config error happens."""
 
 
 class MissingConfig(AttributeError):

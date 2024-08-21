@@ -19,6 +19,7 @@ class ConfigValue:
     This class allows updating and accessing configuration values using attribute and item notation.
 
     :param values: A dictionary of initial configuration values.
+    :param raise_on_missing_config: If it should raise the MissingConfig exception if this configuration is missing.
 
     Example usage
     ::

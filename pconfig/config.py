@@ -59,14 +59,14 @@ class _ConfigMeta(type):
         if item.startswith("__") or item.startswith("_pytest"):
             raise AttributeError(item)
         if cls.raise_on_missing_config:
-            cls.raise_missing_config_error(item)
+            cls._raise_missing_config_error(item)
         return NotSet
 
     def __getattribute__(cls: type["ConfigBase"], item: str) -> Any:
         attr = super().__getattribute__(item)
         if isinstance(attr, ConfigValue) and not attr.values:
             if attr.raise_on_missing_config:
-                cls.raise_missing_config_error(item)
+                cls._raise_missing_config_error(item)
             return NotSet
         return attr
 
@@ -113,10 +113,11 @@ class ConfigBase(metaclass=_ConfigMeta):
 
     """
 
-    raise_on_missing_config = True
+    raise_on_missing_config: bool = True
+    """ If it should raise the MissingConfig exception if a configuration is missing."""
 
     @classmethod
-    def raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
+    def _raise_missing_config_error(cls: type["ConfigBase"], item: str) -> NoReturn:
         """Raise the MissingConfig error"""
         raise MissingConfig(
             f"The configuration {cls.__name__} has no configuration '{item}'"
