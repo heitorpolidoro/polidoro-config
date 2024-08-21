@@ -45,6 +45,22 @@ def test_load_yaml_when_yaml_is_not_installed(tmp_path):
     )
 
 
+def test_load_yaml_when_yaml_is_not_installed_and_not_used(tmp_path):
+    # noinspection PyGlobalUndefined
+    dotenv_file = tmp_path / ".env"
+    dotenv_file.write_text("LOAD_ENV_VAR=load_value")
+
+    with (
+        change_dir(tmp_path),
+        import_error("yaml"),
+    ):
+        # noinspection PyUnusedLocal
+        class ConfigTest(ConfigBase):
+            LOAD_ENV_VAR = None
+
+    assert ConfigTest.LOAD_ENV_VAR == "load_value"
+
+
 def test_load_with_falsy_file_path():
     class ConfigTest(ConfigBase):
         file_path = None
