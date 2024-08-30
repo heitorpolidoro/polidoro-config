@@ -36,6 +36,7 @@ myst_enable_extensions = ["colon_fence", "fieldlist"]
 pygments_style = "sphinx"
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+templates_path = ['_templates']
 
 # Whether to prepend module names to object names in `.. autoclass::` etc.
 add_module_names = False
@@ -49,31 +50,3 @@ html_theme_options = {
 
 napoleon_google_docstring = True
 autodoc_member_order = "bysource"
-
-
-def generate_class_doc(clazz):
-    template = """$className
-==================
-
-.. currentmodule:: $module
-.. autoclass:: $className
-  :show-inheritance:
-  :members:
-"""
-    return Template(template).substitute(
-        className=clazz.__name__, module=clazz.__module__
-    )
-
-
-def generate_module_docs(module, path=".", exclude=None):
-    exclude = exclude or []
-    for clazz in vars(module).values():
-        if isinstance(clazz, type) and clazz.__name__ not in exclude:
-            file_name = clazz.__module__.replace(f"{module.__package__}.", "") + ".rst"
-
-            content = generate_class_doc(clazz)
-            with open(os.path.join(path, file_name), "w") as file:
-                file.write(content)
-
-
-generate_module_docs(loaders, "classes", exclude=["ConfigEnvVarLoader", "ConfigLoader"])

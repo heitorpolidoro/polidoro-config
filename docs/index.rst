@@ -9,6 +9,12 @@ Polidoro Config it is a configuration manager for you project
   Home <self>
   Classes <classes/index>
 
+Installation
+============
+.. code:: shell
+
+  pip install polidoro-config
+
 Usage
 ============
 Create a class inheriting from ConfigBase
