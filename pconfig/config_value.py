@@ -58,7 +58,7 @@ class ConfigValue:
         attributes = ", ".join(f"{k}={repr(v)}" for k, v in self.values.items())
         return f"{self.__class__.__name__}({attributes})"
 
-    def __getattr__(self, item: str) ->Any:
+    def __getattr__(self, item: str) -> Any:
         return self.values[item]
 
     def __getitem__(self, item: str) -> Any:
