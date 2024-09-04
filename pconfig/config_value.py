@@ -7,10 +7,6 @@ environment variables, configuration files (e.g., YAML).
 
 from typing import Any
 
-from typing_extensions import TypeVar
-
-ConfigValueType = TypeVar("ConfigValue")
-
 
 class ConfigValue:
     """
@@ -35,7 +31,7 @@ class ConfigValue:
         self.raise_on_missing_config = raise_on_missing_config
         self.values = values
 
-    def update(self, values: dict[str, Any | dict] | Any) -> ConfigValueType | Any:
+    def update(self, values: dict[str, Any]) -> Any:
         """
         Update the configuration values with new values.
 
@@ -62,8 +58,8 @@ class ConfigValue:
         attributes = ", ".join(f"{k}={repr(v)}" for k, v in self.values.items())
         return f"{self.__class__.__name__}({attributes})"
 
-    def __getattr__(self, item: str) -> ConfigValueType | Any:
+    def __getattr__(self, item: str) ->Any:
         return self.values[item]
 
-    def __getitem__(self, item: str) -> ConfigValueType | Any:
+    def __getitem__(self, item: str) -> Any:
         return self.values[item]
