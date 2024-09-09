@@ -162,3 +162,4 @@ cython_debug/
 /private-key.pem
 
 .vercel/
+/docs/classes/pconfig.loaders.*.rst
