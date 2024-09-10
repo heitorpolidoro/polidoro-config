@@ -1,6 +1,6 @@
 import pytest
 
-from pconfig.config import BaseModel, ConfigBase, ConfigValue
+from pconfig.config import ConfigBase, ConfigValue
 from pconfig.error import ConfigError
 from tests.conftest import change_dir, import_error
 
