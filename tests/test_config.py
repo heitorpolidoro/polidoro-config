@@ -3,7 +3,7 @@ import importlib
 import pytest
 
 from pconfig import NotSet, config
-from pconfig.config import ConfigBase, ConfigValue, BaseModel
+from pconfig.config import BaseModel, ConfigBase, ConfigValue
 from pconfig.error import MissingConfig
 from tests.conftest import import_error
 
