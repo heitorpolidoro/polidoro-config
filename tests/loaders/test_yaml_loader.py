@@ -1,8 +1,7 @@
 import pytest
 
-from pconfig.config import ConfigBase, ConfigValue, BaseModel
+from pconfig.config import BaseModel, ConfigBase, ConfigValue
 from pconfig.error import ConfigError
-
 from tests.conftest import change_dir, import_error
 
 
@@ -44,9 +43,8 @@ def test_load_yaml_when_yaml_is_not_installed(tmp_path, monkeypatch):
 def test_load_yaml_when_yaml_is_not_installed_and_not_used(monkeypatch):
     monkeypatch.setenv("LOAD_ENV_VAR", "load_value")
 
-    with (
-        import_error("yaml"),
-    ):
+    with (import_error("yaml"),):
+
         class ConfigTest(ConfigBase):
             LOAD_ENV_VAR = None
 
@@ -129,5 +127,3 @@ def test_load_yaml_wrong_complex_config(tmp_path):
             config = ConfigValue(var1=ConfigValue(var2="default"))
 
         assert ConfigTest.config.var1 == 1
-
-

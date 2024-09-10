@@ -1,5 +1,5 @@
+from pconfig.config import BaseModel, ConfigBase
 from tests.conftest import change_dir
-from pconfig.config import ConfigBase, BaseModel
 
 
 def test_load_yaml_complex_config_with_pydantic(tmp_path):
