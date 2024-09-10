@@ -44,11 +44,11 @@ class ConfigYAMLLoader(ConfigLoader):
     order = 100
 
     @classmethod
-    def load_config(cls, file_path: str, **_kwargs) -> dict[str, Any]:
+    def load_config(cls, yaml_file: str, **_kwargs) -> dict[str, Any]:
         """Load the configuration fom a YAML file.
 
         Args:
-            file_path: YAML file path
+            yaml_file: YAML file path
 
         Returns:
             The configuration ``dict``
@@ -58,7 +58,7 @@ class ConfigYAMLLoader(ConfigLoader):
                 "Must install pyyaml to use this feature. `pip install pyyaml`"
             )
         config = {}
-        if file_path and (file_path.endswith(".yml") or file_path.endswith(".yaml")):
-            with open(file_path, "r") as file:
+        if yaml_file and (yaml_file.endswith(".yml") or yaml_file.endswith(".yaml")):
+            with open(yaml_file, "r") as file:
                 config = yaml.safe_load(file)
         return config

@@ -7,7 +7,7 @@ environment variables, configuration files (e.g., YAML).
 
 import json
 import logging
-from typing import Any, NoReturn
+from typing import Any, NoReturn, Optional
 
 from pconfig.config_value import ConfigValue
 from pconfig.error import MissingConfig
@@ -28,8 +28,8 @@ class _ConfigMeta(type):
     def __init__(
         cls: type["ConfigBase"],
         name: str,
-        bases: tuple[type] | None = None,
-        attributes: dict[str, Any] | None = None,
+        bases: Optional[tuple[type]] = None,
+        attributes: Optional[dict[str, Any]] = None,
     ) -> None:
         super().__init__(name, bases, attributes)
         params = {

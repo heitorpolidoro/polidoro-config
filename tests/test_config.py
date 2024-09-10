@@ -1,17 +1,14 @@
 import importlib
 
 import pytest
-from pydantic import BaseModel
 
-from pconfig import ConfigBase, NotSet, config
-from pconfig.config_value import ConfigValue
+from pconfig import NotSet, config
+from pconfig.config import ConfigBase, ConfigValue, BaseModel
 from pconfig.error import MissingConfig
 from tests.conftest import import_error
 
 
 def test_when_pydantic_is_not_installed():
-    # noinspection PyGlobalUndefined
-
     with (import_error("pydantic"),):
         importlib.reload(config)
 

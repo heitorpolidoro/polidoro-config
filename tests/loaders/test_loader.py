@@ -7,7 +7,6 @@ from pconfig.config import ConfigBase
 loader_calls = []
 
 
-# noinspection PyUnusedLocal
 def test_loader():
     from pconfig.loaders.loader import ConfigLoader
 
@@ -39,7 +38,6 @@ def test_loader():
     assert LoaderTest1.calls == 1
 
 
-# noinspection PyAbstractClass,PyUnusedLocal
 def test_raise_not_implemented_error():
     from pconfig.loaders.loader import ConfigLoader
 

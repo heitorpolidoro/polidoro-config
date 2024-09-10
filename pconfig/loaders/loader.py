@@ -7,7 +7,7 @@ import inspect
 import logging
 import sys
 from abc import abstractmethod
-from typing import Any
+from typing import Any, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def load_configs(**params) -> dict[str, Any]:
 
 def _get_parameters(
     params: dict[str, Any], signature: inspect.Signature
-) -> dict[str, Any] | None:
+) -> Optional[dict[str, Any]]:
     """
     Returns the parameters that the method needs or accepts that are in ``params`` or
     None if the method needs a parameter that is not in ``params``
@@ -48,7 +48,7 @@ def _get_parameters(
         signature: The method signature
 
     Returns:
-        dict[str, object] | None: The filtered parameters or None if a parameter is missing
+        Optional[dict[str, Any]]: The filtered parameters or None if a parameter is missing
     """
     filtered_params = {}
     for param_name, param in signature.parameters.items():
