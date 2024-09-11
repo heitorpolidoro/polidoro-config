@@ -10,12 +10,9 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html#project-informatio
 
 import os
 import sys
-from string import Template
 
 sys.path.insert(0, os.path.abspath("../"))
 sys.path.insert(0, os.path.abspath("../pconfig"))
-
-from pconfig import loaders
 
 project = "Polidoro Config"
 copyright = "2024, Heitor Polidoro"
